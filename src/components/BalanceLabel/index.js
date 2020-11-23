@@ -24,6 +24,7 @@ const BalanceLabel = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    padding: 20,
   },
   label: {
     fontSize: 12,
