@@ -18,9 +18,14 @@ const Report = ({navigation}) => {
       <View>
         <Picker>
           <Picker.Item label="Todas Categorias" />
+          <Picker.Item label="Categoria 1" />
+          <Picker.Item label="Categoria 2" />
+          <Picker.Item label="Categoria 3" />
         </Picker>
         <Picker>
           <Picker.Item label="Últimos 7 dias" />
+          <Picker.Item label="Últimos 15 dias" />
+          <Picker.Item label="Últimos 21 dias" />
         </Picker>
       </View>
 
