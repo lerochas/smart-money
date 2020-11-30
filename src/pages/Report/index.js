@@ -1,5 +1,13 @@
-import React from 'react';
-import {View, Picker, ScrollView, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ActionFooter, {
   ActionPrimaryButton,
@@ -8,30 +16,52 @@ import ActionFooter, {
 import BalanceLabel from '../../components/BalanceLabel';
 import EntrySummary from '../../components/EntrySummary';
 import EntryList from '../../components/EntryList';
+import RelativeDaysModal from '../../components/RelativeDaysModal';
 
 import Colors from '../../styles/Colors';
 
 const Report = ({navigation}) => {
+  const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(
+    false,
+  );
+
+  const [relativeDays, setRelativeDays] = useState(7);
+
+  const onRelativeDaysPress = item => {
+    setRelativeDays(item);
+    onRelativeDaysClosePress();
+  };
+
+  const onRelativeDaysClosePress = () => {
+    setRelativeDaysModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <BalanceLabel />
       <View>
-        <Picker>
-          <Picker.Item label="Todas Categorias" />
-          <Picker.Item label="Categoria 1" />
-          <Picker.Item label="Categoria 2" />
-          <Picker.Item label="Categoria 3" />
-        </Picker>
-        <Picker>
-          <Picker.Item label="Últimos 7 dias" />
-          <Picker.Item label="Últimos 15 dias" />
-          <Picker.Item label="Últimos 21 dias" />
-        </Picker>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => {
+            setRelativeDaysModalVisible(true);
+          }}>
+          <Text style={styles.filterButtonText}>Últimos 7 dias</Text>
+          <Icon
+            name="keyboard-arrow-down"
+            size={20}
+            color={Colors.champagneDark}
+          />
+        </TouchableOpacity>
+        <RelativeDaysModal
+          isVisible={relativeDaysModalVisible}
+          onConfirm={onRelativeDaysPress}
+          onCancel={onRelativeDaysClosePress}
+        />
       </View>
 
       <ScrollView>
         <EntrySummary />
-        <EntryList />
+        <EntryList days={relativeDays} />
       </ScrollView>
 
       <ActionFooter>
@@ -50,6 +80,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+  },
+  filterButton: {
+    flexDirection: 'row',
+    borderColor: Colors.champagneDark,
+    borderWidth: 1,
+    borderRadius: 150,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginHorizontal: 5,
+  },
+  filterButtonText: {
+    color: Colors.champagneDark,
   },
 });
 
