@@ -2,13 +2,14 @@ import React from 'react';
 import {Alert, View, TouchableOpacity, StyleSheet} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import Colors from '../../../styles/Colors';
 
 const NewEntryDeleteAction = ({entry, onOkPress}) => {
   const onDelete = () => {
     Alert.alert(
       'Apagar?',
-      'Você realmente deseja apagar este lançamento?',
+      'Você deseja realmente apagar este lançamento?',
       [
         {text: 'Não', style: 'cancel'},
         {text: 'Sim', onPress: () => onOkPress()},

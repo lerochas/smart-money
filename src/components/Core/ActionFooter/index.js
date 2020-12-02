@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 import Colors from '../../../styles/Colors';
 
@@ -42,16 +42,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.green,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    margin: 2,
-  },
-  secondaryButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
   },
   primaryButtonText: {
     fontSize: 18,
     textAlign: 'center',
     color: Colors.green,
+  },
+  secondaryButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   secondaryButtonText: {
     fontSize: 18,
