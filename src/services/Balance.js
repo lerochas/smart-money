@@ -31,7 +31,7 @@ export const getBalanceSumByDate = async days => {
       .subtract(days, 'days')
       .toDate();
 
-    entries = entries.filtered('entryAt < $0', date);
+    entries = entries.filtered('entryAt >= $0', date);
   }
 
   entries = entries.sorted('entryAt');
@@ -47,7 +47,34 @@ export const getBalanceSumByDate = async days => {
       );
     });
 
-  console.log(JSON.stringify());
+  console.log('getBalanceSumByDate :: ', JSON.stringify());
+
+  return entries;
+};
+
+export const getBalanceSumByCategory = async (days, showOthers = true) => {
+  const realm = await getRealm();
+
+  let entries = realm.objects('Entry');
+
+  if (days > 0) {
+    const date = moment()
+      .subtract(days, 'days')
+      .toDate();
+
+    entries = entries.filtered('entryAt >= $0', date);
+  }
+
+  entries = _(entries)
+    .groupBy(({category: {id}}) => id)
+    .map(entry => ({
+      category: _.omit(entry[0].category, 'entries'),
+      amount: Math.abs(_.sumBy(entry, 'amount')),
+    }))
+    .filter(({amount}) => amount > 0)
+    .orderBy('amount', 'desc');
+
+  console.log('getBalanceSumByCategory :: ', JSON.stringify(entries));
 
   return entries;
 };
