@@ -1,1 +1,1 @@
-![Smart Money](<img src="https://github.com/lerochas/smart-money/tree/master/src/assets/smartMoney.gif" width="412" height="690" />)
+![Alt Text](https://github.com/lerochas/smart-money/blob/master/src/assets/smartMoney.gif?raw=true)
